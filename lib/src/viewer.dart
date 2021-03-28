@@ -200,13 +200,24 @@ class _PDFViewerState extends State<PDFViewer> {
     showDialog<int>(
         context: context,
         builder: (BuildContext context) {
-          return NumberPickerDialog.integer(
-            title: Text(widget.tooltip.pick),
-            minValue: 1,
-            cancelWidget: Container(),
-            maxValue: widget.document.count,
-            initialIntegerValue: _pageNumber,
-          );
+          return NumberPicker(
+          value: _pageNumber,
+          minValue: 0,
+          maxValue: 100,
+          step: 10,
+          itemHeight: 100,
+          axis: Axis.horizontal,
+          onChanged: (value) =>
+              setState(() => _pageNumber = value),
+         
+        );
+          // NumberPickerDialog.integer(
+          //   title: Text(widget.tooltip.pick),
+          //   minValue: 1,
+          //   cancelWidget: Container(),
+          //   maxValue: widget.document.count,
+          //   initialIntegerValue: _pageNumber,
+          // );
         }).then((int value) {
       if (value != null) {
         _pageNumber = value;
